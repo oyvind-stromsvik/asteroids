@@ -53,7 +53,5 @@ public class DynamicObject : MonoBehaviour {
 
 		// Tell ourself that we got hit.
 		SendMessage("Hit");
-		// Tell the other gameobject that it was hit as well.
-		coll.gameObject.SendMessage("Hit");
     }
 }
