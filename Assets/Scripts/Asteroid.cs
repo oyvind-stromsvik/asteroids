@@ -59,14 +59,19 @@ public class Asteroid : MonoBehaviour {
 		GetComponent<Rigidbody2D>().velocity *= (0.9f + (manager.currentLevel / 10f));
 
 		// If asteroid collision is enabled then allow the asteroid to rotate.
-		GetComponent<Rigidbody2D>().fixedAngle = !manager.asteroidCollision;
+		if (manager.asteroidCollision) {
+			GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+		}
+		else {
+			GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+		}
     }
 
     /**
      * The method called when the DynamicObject component registers a collsion.
      */
 	public void Hit() {
-        // If the asteroid can split then split it into a number of new asteroids.
+	    // If the asteroid can split then split it into a number of new asteroids.
 		if (currentSplit <= maxNumberOfSplits) {
 			float part = 360f / childrenFromSplit;
 			for (int i = 0; i < childrenFromSplit; i++) {

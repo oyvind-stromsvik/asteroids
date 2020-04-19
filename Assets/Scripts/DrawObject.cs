@@ -37,12 +37,15 @@ public class DrawObject : MonoBehaviour {
 
 	void Start() {
 		if (manager.blackAndWhite) {
-			lineRenderer.SetColors(Color.white, Color.white);
+			lineRenderer.startColor = Color.white;
+			lineRenderer.endColor = Color.white;
 		}
 		else {
-			lineRenderer.SetColors(color, color);
+			lineRenderer.startColor = color;
+			lineRenderer.endColor = color;
 		}
-		lineRenderer.SetWidth(width, width);
+		lineRenderer.startWidth = width;
+		lineRenderer.endWidth = width;
 	}
 
 	/**
@@ -65,7 +68,7 @@ public class DrawObject : MonoBehaviour {
 			}
 		}
 
-		lineRenderer.SetVertexCount(drawPoints.Count);
+		lineRenderer.positionCount = drawPoints.Count;
 
 		int i = 0;
 		foreach (Vector3 point in drawPoints) {
