@@ -19,7 +19,8 @@ public class ServerScore : MonoBehaviour {
 
 	void Start() {
         // Attempt to get the current high score when the game starts.
-        StartCoroutine(DownloadHighscore());
+        // NOTE: There is no backend anymore.
+        //StartCoroutine(DownloadHighscore());
 	}
 
 	/**
@@ -29,6 +30,10 @@ public class ServerScore : MonoBehaviour {
      * then adds the score to the database.
 	 */
 	public IEnumerator UploadScore(string name, int score) {
+        // NOTE: There is no backend anymore.
+        manager.ScoreUploaded();
+        yield break;
+        
 		// Create the security hash using our secret key.
 		string hash = Md5Sum(name + score.ToString() + secretKey);
 

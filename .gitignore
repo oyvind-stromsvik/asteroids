@@ -2,9 +2,12 @@
 /*
 /*/
 
-# Except for the gitignore file itself.
-!.gitignore
-
-# And these folders.
+# Except for these folders.
 !/Assets/
 !/ProjectSettings/
+!/Packages/
+!/Builds/
+
+# And these files
+!.gitignore
+!README.md
