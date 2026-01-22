@@ -62,6 +62,13 @@ public class Player : MonoBehaviour {
 	float deathInvulnTimer;
 	float fireRate;
 
+	// Touch input variables for mobile.
+	Vector2 touchStartPos;
+	bool isSwiping;
+	float swipeThreshold = 50f;
+	float tapMaxDuration = 0.2f;
+	float touchStartTime;
+
 	void Awake() {
 		manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 		shield = transform.Find("Shield").GetComponent<Shield>();
@@ -141,6 +148,54 @@ public class Player : MonoBehaviour {
 		thrust = Input.GetAxisRaw("Vertical");
 		if (Input.GetButtonDown("Hyperspace")) {
 			StartCoroutine("Hyperspace");
+		}
+
+		// Mobile touch input handling.
+		if (Input.touchCount > 0) {
+			Touch touch = Input.GetTouch(0);
+
+			if (touch.phase == TouchPhase.Began) {
+				touchStartPos = touch.position;
+				touchStartTime = Time.time;
+				isSwiping = false;
+			}
+			else if (touch.phase == TouchPhase.Moved) {
+				Vector2 touchDelta = touch.position - touchStartPos;
+
+				// Check if this is a swipe.
+				if (touchDelta.magnitude > swipeThreshold) {
+					isSwiping = true;
+
+					// Horizontal swipe for rotation.
+					if (Mathf.Abs(touchDelta.x) > Mathf.Abs(touchDelta.y)) {
+						turning = Mathf.Sign(touchDelta.x);
+					}
+					// Vertical swipe for thrust.
+					else if (touchDelta.y > 0) {
+						thrust = 1f;
+					}
+				}
+			}
+			else if (touch.phase == TouchPhase.Ended) {
+				// If touch ended quickly and we weren't swiping, treat it as a tap to shoot.
+				float touchDuration = Time.time - touchStartTime;
+				if (!isSwiping && touchDuration < tapMaxDuration && nextFire > fireRate) {
+					Shoot();
+				}
+
+				// Reset touch input values.
+				if (isSwiping) {
+					turning = 0;
+					thrust = 0;
+				}
+				isSwiping = false;
+			}
+		}
+		// Reset touch input values when no touch is detected.
+		else if (isSwiping) {
+			turning = 0;
+			thrust = 0;
+			isSwiping = false;
 		}
 
         // Thrusting and flame handling.
