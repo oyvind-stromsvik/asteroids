@@ -1,4 +1,5 @@
 # Asteroids
+![Screenshot](./docs/Screenshots/asteroids.png)
 
 A simple Asteroids clone I made just to see how it would feel to work on a project with a small scope and known boundaries. I still managed to have some feature creep, but I got it done in a fairly short amount of time.
 
