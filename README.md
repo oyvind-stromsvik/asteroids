@@ -15,10 +15,9 @@ I made a work in progress thread for this project on the official Unity forums i
 
 **Note:** There used to be server side highscores for this game. The code is included, but the backend no longer exists, so I commented out any parts that would break because of it.
 
-## How to Play
+## The Game
 
-### Objective
-Destroy all asteroids to advance to the next level while avoiding collisions with asteroids and enemy UFOs.
+https://oyvind-stromsvik.github.io/asteroids/
 
 ### Controls
 
@@ -42,14 +41,14 @@ Destroy all asteroids to advance to the next level while avoiding collisions wit
 - Small asteroids: 100 points
 - UFO: 200 points
 
-## Game Modes
+### Game Modes
 
-### Classic Mode
+#### Classic Mode
 - Traditional lives system (3 lives to start)
 - 4-bullet limit (original arcade limitation)
 - No asteroid-to-asteroid collision
 
-### Custom Mode
+#### Custom Mode
 - Choose between lives or recharging shields
 - Adjust bullet limits and collision behavior
 - Toggle visual effects
